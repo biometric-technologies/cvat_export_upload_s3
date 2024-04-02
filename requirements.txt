@@ -1,0 +1,4 @@
+cvat-sdk
+minio
+python-dotenv
+pandas
