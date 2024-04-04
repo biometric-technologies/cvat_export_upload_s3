@@ -2,7 +2,7 @@ from pathlib import Path
 
 from dotenv import dotenv_values
 from minio import Minio
-
+import os
 from cvat_utils import get_tasks, export_task
 from minio_utils import get_tasks_csv, upload_tasks_csv, upload_file
 from cvat_sdk.api_client import Configuration, ApiClient
@@ -66,5 +66,8 @@ if synced_count > 0:
     print(tasks_csv)
 else:
     print("No tasks were synced")
+
+print("Removing temp directory")
+os.rmdir(".tmp")
 
 print("Sync completed")
