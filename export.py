@@ -8,6 +8,7 @@ from minio_utils import get_tasks_csv, upload_tasks_csv, upload_file
 from cvat_sdk.api_client import Configuration, ApiClient
 from utils import str_to_bool
 import argparse
+import shutil
 
 parser = argparse.ArgumentParser('Export annotations', add_help=False)
 parser.add_argument('--config_env', default='.env', type=str, help="Path to .evn config")
@@ -74,6 +75,6 @@ else:
 
 if os.path.exists(".tmp"):
     print("Removing temp directory")
-    os.rmdir(".tmp")
+    shutil.rmtree(".tmp")
 
 print("Sync completed")
