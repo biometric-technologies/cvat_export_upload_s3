@@ -7,9 +7,14 @@ from cvat_utils import get_tasks, export_task
 from minio_utils import get_tasks_csv, upload_tasks_csv, upload_file
 from cvat_sdk.api_client import Configuration, ApiClient
 from utils import str_to_bool
+import argparse
+
+parser = argparse.ArgumentParser('Export annotations', add_help=False)
+parser.add_argument('--config_env', default='.env', type=str, help="Path to .evn config")
+args = parser.parse_args()
 
 print("Start sync data")
-env_vars = dotenv_values(".env")
+env_vars = dotenv_values(args.config_env)
 
 minio_client = Minio(env_vars["MINIO_URL"],
                      access_key=env_vars["MINIO_ACCESS_KEY"],
@@ -67,7 +72,8 @@ if synced_count > 0:
 else:
     print("No tasks were synced")
 
-print("Removing temp directory")
-os.rmdir(".tmp")
+if os.path.exists(".tmp"):
+    print("Removing temp directory")
+    os.rmdir(".tmp")
 
 print("Sync completed")

@@ -81,6 +81,7 @@ env/
 venv/
 ENV/
 .tmp/
+wg0.conf
 
 # PyCharm files
 .idea/
